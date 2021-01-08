@@ -1,0 +1,10 @@
+<h1>ユーザの一覧ページです。</h1>
+
+<% @users.each do |user| %>
+
+  番号：<%= user.id %>
+  名前：<%= user.name %>
+  説明：<%= user.introduction %>
+  <br>
+
+<% end %>
