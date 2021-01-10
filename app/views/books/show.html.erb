@@ -8,11 +8,9 @@
 プロフィール画像: 
   <%= attachment_image_tag @book.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
   <!--ログインユーザ自身のbookを見ている場合は、ユーザー編集、他のユーザのbookを見ている場合は、マイページへのリンク　記述始め-->
-　<% if @book.user == current_user %>
-    <%= link_to "ログインユーザーのマイページへのリンク", edit_user_path(current_user) %>
-  <% else %>
-    <%= link_to "bookuserへのユーザーページ", user_path(@book.user)%>
-  <% end %>
+
+    <%= link_to "bookuserへのユーザーページ", edit_user_path(@book.user)%>
+
   <!--ログインユーザ自身のbookを見ている場合は、ユーザー編集、他のユーザのbookを見ている場合は、マイページへのリンク　記述終わり-->
 
 
