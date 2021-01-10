@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   
   before_action :authenticate_user,{only:[:index, :show, :edit, :create, :update, :destroy]}
-  before_action :check_book,{only:[:edit, :create, :update, :destroy]}
+  before_action :check_book,{only:[:edit, :update, :destroy]}
   
   def index
     @books = Book.all
