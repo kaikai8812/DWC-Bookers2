@@ -1,1 +1,22 @@
 <h1>welcome to Bookers !!</h1>
+
+<p>
+  In Bookers,<br>
+  you can share and exchange your opinions , inpressions , and emotions<br>
+  about various books!
+</p>
+    <% if user_signed_in? %>
+    <div class = "Log_in_button">
+      <%= link_to "Log in", user_path(current_user) %>
+    </div>
+    <div class = "Sign_up_button">
+      <%= link_to "Sign up", user_path(current_user) %>
+  
+  <% else %>
+      <div class = "Log_in_button">
+      <%= link_to "Log in", new_user_session_path %>
+    </div>
+    <div class = "Sign_up_button">
+      <%= link_to "Sign up", new_user_registration_path %>
+  <% end %>
+</div>

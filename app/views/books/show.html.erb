@@ -1,2 +1,41 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<h1>Bookの詳細画面です。</h1>
+
+<h2>User info</h2>
+番号: <%= @book.user.id%><br>
+名前： <%= @book.user.name %><br>
+説明： <%= @book.user.introduction %><br>
+
+プロフィール画像: 
+  <%= attachment_image_tag @book.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+<%= link_to "ログインユーザーのマイページへのリンク", user_path(current_user)%>
+
+<!--ここで、ログインしているユーザーが新しくbookを登録できなくてはならない。-->
+
+<!--投稿フォーム始め-->
+<h2>book投稿フォーム</h2>
+<%= form_with model: @new_book, local:true do |f|%>
+<h4>Title</h4>
+<%= f.text_field :title %>
+<h4>Opinion</h4>
+<%= f.text_area :body %>
+<%= f.submit 'Create Book' %>
+<% end %>
+<!--投稿フォーム終わり-->
+
+
+<h2>Book detail</h2>
+<%= link_to user_path(@book.user) do%>
+  <%= attachment_image_tag @book.user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %>
+  <li><%= @book.user.name%></li>
+<% end %>
+<%= link_to book_path(@book) do%>
+  <li><%= @book.title%></li>
+<% end %>  
+  <li><%= @book.body%></li>
+
+<% if @book.user == current_user %>
+  <li><%= link_to "Edit", edit_book_path(@book) %></li>
+  <li><%= link_to "Destroy", book_path(@book), method: :delete %></li>
+<% end %>
+
+

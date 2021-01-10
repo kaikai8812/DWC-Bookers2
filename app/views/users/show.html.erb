@@ -1,6 +1,40 @@
+
+
 <h1>ユーザーのマイページです。</h1>
 
+<h2>User info</h2>
 番号: <%= @user.id%><br>
 名前： <%= @user.name %><br>
 説明： <%= @user.introduction %><br>
 
+プロフィール画像: 
+  <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+  
+  <!--ログインしているユーザーによって、リンクが替わるように記述-->
+  <% if @user == current_user%>
+    <%= link_to "edit画面へのリンク", edit_user_path(@user)%>
+  <% else %>
+    <%= link_to "マイページへのリンク(ログインしていないユーザーのページだよ)", user_path(current_user) %>
+  <% end %>
+  <!--ログインしているユーザーによって、リンクが替わるように記述-->
+  
+<h2>book投稿フォーム</h2>
+<%= form_with model: @book, local:true do |f|%>
+<h4>Title</h4>
+<%= f.text_field :title %>
+<h4>Opinion</h4>
+<%= f.text_area :body %>
+<%= f.submit 'Create Book' %>
+<% end %>
+
+<h2>Books</h2>
+
+<% @user.books.each do |book| %>
+
+<%= link_to book_path(book) do %>
+  <%= attachment_image_tag book.user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %>
+    <p>Title: <%= book.title %></p>
+<% end %>  
+    <p>opinion: <%= book.body %></p>
+  <br>
+<% end %>

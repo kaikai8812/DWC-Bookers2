@@ -1,0 +1,24 @@
+<h1>User info</h1>
+
+<% if @user.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <p><%= @user.errors.count %> errors prohibited this book from being saved:</p>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model:@user, local:true do |f| %>
+  <label for="inputName">Name</label><br>
+  <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"#{@user.name}" %><br>
+  <label>Image</label><br>
+  <%= f.attachment_field :profile_image, placeholder: "プロフィール画像" %><br>
+  <label for="inputIntroduction">Introduction</label><br>
+  <%= f.text_field :introduction, autofocus: true, id:"inputIntroduction", placeholder:"#{@user.introduction}" %><br>
+  <%= f.submit "Update User" %>
+<% end %>
+
+
