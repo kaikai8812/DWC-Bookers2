@@ -1,46 +1,49 @@
-<h1>Bookの詳細画面です。</h1>
 
-<h2>User info</h2>
-番号: <%= @book.user.id%><br>
-名前： <%= @book.user.name %><br>
-説明： <%= @book.user.introduction %><br>
-
-プロフィール画像: 
-  <%= attachment_image_tag @book.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+<%= render 'users/user_info', user: @book.user %>
   <!--ログインユーザ自身のbookを見ている場合は、ユーザー編集、他のユーザのbookを見ている場合は、マイページへのリンク　記述始め-->
 
-    <%= link_to "bookuserへのユーザーページ", edit_user_path(@book.user)%>
-
-  <!--ログインユーザ自身のbookを見ている場合は、ユーザー編集、他のユーザのbookを見ている場合は、マイページへのリンク　記述終わり-->
-
-
-<!--ここで、ログインしているユーザーが新しくbookを登録できなくてはならない。-->
-
-<!--投稿フォーム始め-->
-<h2>New book</h2>
-<%= form_with model: @new_book, local:true do |f|%>
-<h4>Title</h4>
-<%= f.text_field :title %>
-<h4>Opinion</h4>
-<%= f.text_area :body %>
-<%= f.submit 'Create Book' %>
-<% end %>
-<!--投稿フォーム終わり-->
+  
+  
+  <!--投稿フォーム始め-->
+  <%= render 'books/form', book: @new_book %>
+  <!--投稿フォーム終わり-->
 
 
-<h2>Book detail</h2>
-<%= link_to user_path(@book.user) do%>
-  <%= attachment_image_tag @book.user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %>
-  <li><%= @book.user.name%></li>
-<% end %>
-<%= link_to book_path(@book) do%>
-  <li><%= @book.title%></li>
-<% end %>  
-  <li><%= @book.body%></li>
-
-<% if @book.user == current_user %>
-  <li><%= link_to "Edit", edit_book_path(@book) %></li>
-  <li><%= link_to "Destroy", book_path(@book), method: :delete %></li>
-<% end %>
 
 
+
+ </div>
+    <div class="books_show col-md-8 offset-md-1" >
+        <h2>Book detail</h2>
+          <table class="table table-striped table-hover">
+
+          <tbody>
+              <tr>
+                  <td>
+                   <%= link_to user_path(@book.user) do%>
+                      <%= attachment_image_tag @book.user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %><br>
+                      <%= @book.user.name%>
+                    <% end %>
+                  </td>   
+                  <td>
+                  <%= link_to book_path(@book) do %>
+                   <%= @book.title %>
+                  <% end %>
+                  </td>
+                  <td>
+                    <%= @book.body%>
+                  </td>
+                  <% if @book.user == current_user %>
+                  <td>
+                   <%= link_to "Edit", edit_book_path(@book), class: "btn btn-success" %>
+                  </td>
+                    
+                  <td>
+                    <%= link_to "Destroy", book_path(@book), method: :delete, class: "btn btn-danger", data: {confirm: "削除しますか？"} %>
+                  </td>
+                  <% end %>
+              </tr>
+          </tbody>
+          </table>
+    </div>
+  </div>  

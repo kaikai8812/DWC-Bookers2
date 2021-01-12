@@ -13,3 +13,25 @@
  *= require_tree .
  *= require_self
  */
+@import "bootstrap";
+@import "font-awesome";
+
+.header-list {
+  margin-right: 20px;
+  
+}
+
+li {
+  list-style: none;
+}
+
+.alert-danger {
+  color: red;
+}
+
+.flash {
+  color: green;
+}
+// .introduction {
+//   height: 60px;
+// }
