@@ -1,10 +1,33 @@
-<h1>ユーザの一覧ページです。</h1>
-
-<% @users.each do |user| %>
-
-  番号：<%= user.id %>
-  名前：<%= user.name %>
-  説明：<%= user.introduction %>
-  <br>
-
-<% end %>
+ <%= render 'users/user_info', user: current_user %>
+      
+      <!--投稿フォーム始め-->
+  <%= render 'books/form', book: @book %>
+      <!--投稿フォーム終わり-->
+    </div>
+    
+    <div class="col-md-8 offset-md-1">
+        <h2>Users</h2>
+          <table class="table table-striped table-hover ">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>name</th>
+                <th colspan="1"></th>
+                <!--colspanは、showまで横線を伸ばすために使用-->
+              </tr>
+            </thead>
+            
+          <tbody>
+        <% @users.each do |user| %>
+              <tr>
+                <td><%= attachment_image_tag user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg" %></td>
+                <td><%= user.name %></td>
+                <td><%= link_to "Show", user_path(user) %></td>
+              </tr>
+        <% end %>
+          </tbody>
+          </table>
+        
+    </div>
+  </div>  
+</div>
