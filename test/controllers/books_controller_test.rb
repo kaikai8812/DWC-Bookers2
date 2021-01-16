@@ -30,5 +30,4 @@ class BooksControllerTest < ActionDispatch::IntegrationTest
     get books_destroy_url
     assert_response :success
   end
-
 end
