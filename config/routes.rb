@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'home/about' => 'homes#about'
 
-  # devise_for :users
+  
 
   # 新規登録、サインイン後のリダイレクト先を決めるタメのやつ
   devise_for :users, controllers: {
@@ -12,5 +12,7 @@ Rails.application.routes.draw do
 
   root to: 'homes#top'
   resources :users, only: [:show, :index, :edit, :update]
-  resources :books, only: [:index, :show, :edit, :create, :update, :destroy]
+  resources :books, only: [:index, :show, :edit, :create, :update, :destroy] do
+    resource :favorites, only: [:create, :destroy]
+  end
 end
