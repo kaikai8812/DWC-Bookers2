@@ -7,6 +7,24 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
+  
+  # ↓フォロー関係記述
+  # 自分が、フォローしているユーザー関連
+  # 自分がフォローされているユーザー関連
+  has_many :active_relationships, class_name: "Relationship", foreign_key: "following_id"
+  has_many :followings, through: :active_relationships, source: :followed
+  has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id"
+  has_many :followeds, through: :passive_relationships, source: :following
+  
+  def followed_by?(user)
+    passive_relationships.find_by(following_id: user.id).present?
+  end
+  
+  # このメソッドでは、passiveなので、フォローされている方が、foreign_idになる。＝＞フォローしてくれてる人かどうかをチェック！
+  
+  
+  
+  
   attachment :profile_image
 
   validates :name, uniqueness: true,

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'relationships/create'
+  get 'relationships/destroy'
   get 'home/about' => 'homes#about'
 
   
@@ -11,9 +13,16 @@ Rails.application.routes.draw do
   # 新規登録、サインイン後のリダイレクト先を決めるタメのやつ
 
   root to: 'homes#top'
-  resources :users, only: [:show, :index, :edit, :update]
+  
   resources :books, only: [:index, :show, :edit, :create, :update, :destroy] do
     resource :favorites, only: [:create, :destroy]
     resources :book_comments, only: [:create, :destroy]
   end
+  resources :users, only: [:show, :index, :edit, :update] do
+    resource :relationships, only: [:create, :destroy]
+    get :follows, on: :member
+    get :followers, on: :member
+    
+  end
+
 end
