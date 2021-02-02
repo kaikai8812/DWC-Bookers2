@@ -26,6 +26,7 @@
                 <th>Title</th>
                 <th>opnion</th>
                 <th>いいね</th>
+                <th>コメント</th>
               </tr>
             </thead>
             
@@ -46,6 +47,9 @@
                   <td><%= book.body %></td>
                 <td>
                   <%= render 'favorites/favorites', user: current_user, book: book %>
+                </td>
+                <td>
+                  <p>コメント数:<%= book.book_comments.count %></p>
                 </td>
               </tr>
         <% end %>
