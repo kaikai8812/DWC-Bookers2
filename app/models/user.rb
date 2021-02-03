@@ -22,7 +22,18 @@ class User < ApplicationRecord
   
   # このメソッドでは、passiveなので、フォローされている方が、foreign_idになる。＝＞フォローしてくれてる人かどうかをチェック！
   
-  
+  def self.search_for(value,method)
+    case method
+      when 'perfect'
+        User.where(name: value)
+      when 'forward'
+        User.where('name LIKE ?', value + '%' )
+      when 'backward'
+        User.where('name LIKE ?', '%' + value )
+      when 'partial'
+        User.where('name LIKE ?', '%' + value + '%')
+    end
+  end
   
   
   attachment :profile_image

@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   get 'relationships/create'
   get 'relationships/destroy'
   get 'home/about' => 'homes#about'
-  get 'search' => 'search#search'
-  
+  # get 'search/search'
+  get '/search', to: 'search#search'
 
   # 新規登録、サインイン後のリダイレクト先を決めるタメのやつ
   devise_for :users, controllers: {
