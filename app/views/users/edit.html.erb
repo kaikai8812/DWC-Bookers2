@@ -1,16 +1,9 @@
 
-<% if @user.errors.any? %>
-  <div id="error_explanation" class="alert alert-danger">
-    <p><%= @user.errors.count %> errors prohibited this book from being saved:</p>
-    <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+
+<%= render 'layouts/errors', obj: @user %>
+
 <div class="container">
-  <div class="row ">
+  <div class="row">
     <div class="col-5 mx-auto">
       <h1>User info</h1>
       <%= form_with model:@user, local:true do |f| %>

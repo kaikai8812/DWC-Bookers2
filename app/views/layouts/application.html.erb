@@ -11,97 +11,18 @@
   </head>
 
   <body class="d-flex flex-column vh-100">
-    <header class="shadow-sm">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
-        <div class="container">
-          <div class="navbar-brand p-3">
-            <li>
-              <%= link_to "Bookers", root_path, {class: "text-light"} %>
-            </li>
-          </div>
-         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-         </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-             <ul class="navbar-nav ml-auto">
-      <% if user_signed_in? %>
-        
-       <%= link_to user_path(current_user.id) do%>
-       <li class="nav-item nav-link text-light">
-           <i class="fas fa-home"></i>Home
-       </li>
-       <% end %>
-       
-        <%= link_to users_path do%>
-       <li class="nav-item nav-link text-light">
-           <i class="fas fa-users"></i>Users
-       </li>
-       <% end %>
-        
-       <%= link_to books_path do%>
-       <li class="nav-item nav-link text-light">
-           <i class="fas fa-book-open"></i>Books
-       </li>
-       <% end %>
-        
-       <%= link_to destroy_user_session_path, method: :delete do%>
-       <li class="nav-item nav-link text-light">
-           <i class="fas fa-sign-out-alt"></i>Logout
-       </li>
-       <% end %>
-        
-      <% else %>
-         <%= link_to root_path do%>
-       <li class="nav-item nav-link text-light">
-           <i class="fas fa-home"></i>Home
-       </li>
-        <% end %>
-        
-        <%= link_to home_about_path do%>
-       <li class="nav-item nav-link text-light">
-           <i class="fas fa-link"></i>About
-       </li>
-	      <% end %>
-        
-        <%= link_to new_user_registration_path do%>
-       <li class="nav-item nav-link text-light">
-           <i class="fas fa-user-plus"></i>sign up
-       </li>
-        <% end %>
-        
-        <%= link_to new_user_session_path do%>
-       <li class="nav-item nav-link text-light">
-           <i class="fas fa-sign-in-alt"></i>Login
-       </li>
-	      <% end %>
-        
-      <% end %>
-         </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
+    <%= render 'layouts/header'%>
     
-    <!--↓検索フォーム記述-->
-    <% if user_signed_in? %>
-     <%= form_with url:search_path, method: :get, local: true do |f| %>
-       <%= f.text_field 'search[value]' %>
-       <%= f.select 'search[model]', options_for_select({"User" => "user", "Book" => "book" })%>
-       <%= f.select 'search[how]', options_for_select({"完全一致" => "match", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partical" })%>
-       <%= f.submit :"検索"%>
-     <% end %>
-    <% end %>
+  <%= render 'layouts/search'%>
   
-  <!--ヘッダー終了-->
+  
     <% if flash[:notice] %>
-  <div class="flash">
-      <%= flash[:notice] %>
-  </div>
-<% end %>
-    
+      <div class="flash">
+       <%= flash[:notice] %>
+      </div>
+     <% end %>
     <%= yield %>
-   <div class="mx-auto mt-auto">
-    <p >CopyRight Infratop.inc</p>
-   </div>
+  <%= render 'layouts/footer' %>
+  
   </body>
 </html>
