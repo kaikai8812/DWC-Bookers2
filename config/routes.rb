@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  get 'search/search'
   get 'relationships/create'
   get 'relationships/destroy'
   get 'home/about' => 'homes#about'
-
+  get 'search' => 'search#search'
   
 
   # 新規登録、サインイン後のリダイレクト先を決めるタメのやつ
