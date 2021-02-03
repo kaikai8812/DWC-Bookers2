@@ -11,10 +11,10 @@ class User < ApplicationRecord
   # ↓フォロー関係記述
   # 自分が、フォローしているユーザー関連
   # 自分がフォローされているユーザー関連
-  has_many :active_relationships, class_name: "Relationship", foreign_key: "following_id"
-  has_many :followings, through: :active_relationships, source: :followed
-  has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id"
-  has_many :followeds, through: :passive_relationships, source: :following
+  has_many :active_relationships, class_name: "Relationship", foreign_key: "followa_id"
+  has_many :followings, through: :active_relationships, source: :followp
+  has_many :passive_relationships, class_name: "Relationship", foreign_key: "followp_id"
+  has_many :followeds, through: :passive_relationships, source: :followa
   
   def followed_by?(user)
     passive_relationships.find_by(following_id: user.id).present?
