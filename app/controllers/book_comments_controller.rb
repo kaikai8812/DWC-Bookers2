@@ -6,7 +6,7 @@ class BookCommentsController < ApplicationController
    @comment.user_id = current_user.id
    @comment.book_id = @book.id
    @comment.save
-   redirect_to request.referer
+  # redirect_to request.referer
 
  
   end
@@ -15,7 +15,7 @@ class BookCommentsController < ApplicationController
   @comment = BookComment.find_by(id: params[:id], book_id: params[:book_id])
 #   binding.pry
   @comment.destroy
-  redirect_to request.referer
+  # redirect_to request.referer
   end
   
   private

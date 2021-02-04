@@ -1,12 +1,14 @@
 <% if book.favorited_by?(user)%>
+  
   <p id="like">
-  <%= link_to book_favorites_path(book), method: :delete do%>
+  <%= link_to book_favorites_path(book), method: :delete, remote: true do%>
     <i class="fas fa-heart"></i><%= book.favorites.count %>
   <% end %>
   </p>
+  
 <% else %>
   <p id="unlike">
-  <%= link_to book_favorites_path(book), method: :post do%>
+  <%= link_to book_favorites_path(book), method: :post, remote: true do%>
     <i class="fas fa-heart"></i><%= book.favorites.count %>
   <% end %>
   </p>

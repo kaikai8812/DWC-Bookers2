@@ -22,7 +22,9 @@
                 <%= @book.body%>
               </td>
               <td>
+                <div id="favorite-<%=@book.id%>">
                 <%= render 'favorites/favorites', user: current_user, book: @book %>
+                </div>
               </td>
               <td>
                 <p>コメント数:<%= @book.book_comments.count %></p>
@@ -41,7 +43,9 @@
       </table>
 
       <!--↓コメント関係-->
+      <div id="comment-<%= @book.id %>">
        <%= render 'books/comment', book: @book, book_comment: @book_comment%>
+      </div>
       <!--↑コメント関係-->
       
   </div>
