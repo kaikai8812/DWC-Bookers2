@@ -41,12 +41,14 @@
           </tr>
       </tbody>
       </table>
-
-      <!--↓コメント関係-->
-      <div id="comment-<%= @book.id %>">
-       <%= render 'books/comment', book: @book, book_comment: @book_comment%>
-      </div>
-      <!--↑コメント関係-->
+      
+   
+       
+       <!--コメント一覧-->
+       <%=render 'books/comment_index', book: @book %>
+       <!--コメント投稿フォーム-->
+       <%=render 'books/comment_form',  book: @book, book_comment: @book_comment %>
+     
       
   </div>
 </div>  
