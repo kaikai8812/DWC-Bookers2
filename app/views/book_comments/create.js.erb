@@ -1,0 +1,4 @@
+console.log("送信はできています。")
+$('#book_comments_index').html("<%= j(render 'book_comments/comment_index', book: @book) %>")
+$('textarea').val("")
+console.log("完了しました。")
