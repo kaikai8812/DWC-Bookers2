@@ -22,6 +22,19 @@ class User < ApplicationRecord
   
   # このメソッドでは、passiveなので、フォローされている方が、foreign_idになる。＝＞フォローしてくれてる人かどうかをチェック！
   
+  # ↓　住所自動入力
+  include JpPrefecture
+  jp_prefecture :prefecture_code
+  
+  def prefecture_name  #都道府県コードから、都道府県名に自動で変換する。
+    JpPrefecture::Prefecture.find(code: prefecture_code).try(:name)
+  end
+  
+  def prefecture_name=(prefecture_name)　#　@user.prefecture_nameで、そのuserの住所が取得できるようになる。
+    self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
+  end
+  
+  # ↑　住所自動入力
   
   
   
@@ -31,4 +44,5 @@ class User < ApplicationRecord
                    length: { minimum: 2, maximum: 20 }
 
   validates :introduction, length: { maximum: 50 }
+  validates :postcode, length: {minimum: 7, maximum: 7}
 end
