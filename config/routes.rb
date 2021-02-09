@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  root to: 'homes#top'
   get 'search/search'
   get 'relationships/create'
   get 'relationships/destroy'
   get 'home/about' => 'homes#about'
   get 'search' => 'search#search'
+  get 'chat/:id' => 'chats#show', as: 'chat'
   
 
   # 新規登録、サインイン後のリダイレクト先を決めるタメのやつ
@@ -13,7 +15,6 @@ Rails.application.routes.draw do
   }
   # 新規登録、サインイン後のリダイレクト先を決めるタメのやつ
 
-  root to: 'homes#top'
   
   resources :books, only: [:index, :show, :edit, :create, :update, :destroy] do
     resource :favorites, only: [:create, :destroy]
@@ -25,5 +26,5 @@ Rails.application.routes.draw do
     get :followers, on: :member
     
   end
-
+  resources :chats, only: [:create]
 end

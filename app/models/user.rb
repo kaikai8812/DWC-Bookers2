@@ -19,8 +19,11 @@ class User < ApplicationRecord
   def followed_by?(user)
     passive_relationships.find_by(following_id: user.id).present?
   end
-  
   # このメソッドでは、passiveなので、フォローされている方が、foreign_idになる。＝＞フォローしてくれてる人かどうかをチェック！
+  
+  has_many :user_rooms
+  has_many :chats
+  has_many :rooms, through: :user_rooms
   
   
   
