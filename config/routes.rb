@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'messages/crete'
   get 'search/search'
   get 'relationships/create'
   get 'relationships/destroy'
@@ -25,5 +26,8 @@ Rails.application.routes.draw do
     get :followers, on: :member
     
   end
+  
+  resources :messages, only: [:create]
+  resources :rooms, only: [:create, :show]
 
 end

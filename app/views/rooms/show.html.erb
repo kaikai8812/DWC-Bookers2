@@ -1,0 +1,42 @@
+<div class="left-button">
+  <%=link_to "ユーザー一覧に戻る。", users_path %>
+</div>
+
+<h4　class="rooms-title" >気になる同士</h4>
+<% @entries.each do |e| %>
+  <div class = "user-name">
+    <strong>
+      <%= link_to user_path(e.user) do %>
+      <%= e.user.name %>　さん
+       <%= attachment_image_tag e.user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg" %>
+      <% end %>
+    </strong>
+  </div>
+<%end%>
+
+<hr>
+
+<div class = "chats">
+  <div class="chat">
+    <% if @messages.present?%>
+      <% @messages.each do |message|%>
+        <div class = "chat-box">
+          <div class = "chat-face">
+            <%= attachment_image_tag message.user, :profile_image, :fill, 20, 20, format: 'jpeg', fallback: "no_image.jpg" %>
+          </div>
+          <div class = "chat-fukidashi">
+            <strong><%= message.message %></strong><br>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  
+  <div class ="posts">
+    <%= form_for @message do |f| %>
+      <%= f.text_field :message, placeholder: "メッセージを入れてください。", size: 70, class:"form-text-field"%>
+      <%= f.hidden_field :room_id, value: @room.id %>
+      <%= f.submit "投稿",class: 'form-submit' %>
+    <% end %>
+  </div>
+</div>
