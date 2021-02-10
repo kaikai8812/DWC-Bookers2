@@ -70,3 +70,4 @@ gem 'jquery-rails'
 gem 'bootstrap', '~> 4.5'
 
 gem 'font-awesome-rails'
+gem 'whenever', require: false

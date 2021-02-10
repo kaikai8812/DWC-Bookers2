@@ -7,16 +7,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/sign_up
   # def new
   #   super
-  #   print '成功しています。'
   # end
 
+  # POST /resource
   # POST /resource
   def create
     super
     puts '登録完了です'
-    if @user.save
+    # if @user.save
       NotificationMailer.complete_mail(@user).deliver_now   #ユーザー登録が成功した時だけ、メールを送信。
-    end
+    # end
   end
 
   # GET /resource/edit

@@ -7,5 +7,12 @@ class NotificationMailer < ApplicationMailer
     attachments['sample.html'] = File.read('app/views/sample/sample_text.html')
     mail(subject: "メールが届きましたぞよ", to: @user.email)  #subjectは、件名　toは宛先
   end
+  
+  def all_mail
+    @users = User.all
+      @users.each do |user|
+      mail(subject: "メールが届きましたぞよ", to: user.email)
+      end
+  end
 
 end
