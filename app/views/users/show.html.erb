@@ -2,6 +2,23 @@
 <!--投稿フォーム始め-->
 <%= render 'books/form', book: @book %>
 <!--投稿フォーム終わり-->
+<!--↓チャット関係記述-->
+<% unless @user.id == current_user.id %>
+  <% if @isRoom == true%>
+    <p class = "user_show_room">
+      <%= link_to "チャットを続ける", room_path(@roomId), class: "btn btn-primary btn-lg" %>
+    </p>
+  <% else %>
+    <%=form_for @room do |f|%>
+      <%= fields_for @entry do |e| %>
+        <%= e.hidden_field :user_id, value: @user.id%>
+      <% end %>
+      <%= f.submit "チャットを始める", class:"btn btn-primary btn-lg user-show_chat"%>
+    <% end %>
+  <% end %>
+<% end %>
+<!--↑チャット関係記述-->
+
 </div>
     <div class="user_books col-md-8 offset-md-1" >
         <h2>Books</h2>

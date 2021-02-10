@@ -22,6 +22,8 @@ class User < ApplicationRecord
   
   # このメソッドでは、passiveなので、フォローされている方が、foreign_idになる。＝＞フォローしてくれてる人かどうかをチェック！
   
+  has_many :messages, dependent: :destroy
+  has_many :entries, dependent: :destroy
   
   
   

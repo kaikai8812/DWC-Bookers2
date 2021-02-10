@@ -1,0 +1,25 @@
+<div class="left-button">
+  <%=link_to "ユーザー一覧に戻る。", users_path %>
+</div>
+
+<h4　class="rooms-title" >気になる同士</h4>
+<% @entries.each do |e| %>
+  <div class = "user-name">
+    <strong>
+      <%= link_to user_path(e.user) do %>
+      <%= e.user.name %>　さん
+       <%= attachment_image_tag e.user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg" %>
+      <% end %>
+    </strong>
+  </div>
+<%end%>
+
+<hr>
+
+<div class = "chats">
+
+ <%= render 'messages/messages', messages: @messages %>
+  
+ <%= render 'messages/form', message: @message %>
+ 
+</div>
