@@ -5,13 +5,14 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @currentUserEntry = Entry.where(user_id: current_user.id) #自分のidがあるレコードをEntryテーブルから取り出す。
-    @userEntry = Entry.where(user_id: @user.id)               #相手のidがあるレコードをEntryテーブルから取り出す。
+    @userEntry = Entry.where(user_id: @user.id)           #相手のidがあるレコードをEntryテーブルから取り出す。
     unless @user.id == current_user.id
       @currentUserEntry.each do |cu|
         @userEntry.each do |u|
           if cu.room_id == u.room_id
             @isRoom = true
             @roomId = cu.room_id
+            binding.pry
           end
         end
       end
