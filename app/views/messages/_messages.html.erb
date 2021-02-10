@@ -1,14 +1,28 @@
-  <div class="chat">
-    <% if messages.present?%>
+  <div class="chat w-50">
+      <table class="message table">
+      <thead class>
+        <tr>
+          <td>
+            <p>ユーザーイメージ</p>
+          </td>
+          <td>
+            <p>コメント</p>
+          </td>
+        </tr>
+      </thead>
+   
+      <tbody  id="message-contents">
       <% messages.each do |message|%>
-        <div class = "chat-box">
-          <div class = "chat-face">
-            <%= attachment_image_tag message.user, :profile_image, :fill, 20, 20, format: 'jpeg', fallback: "no_image.jpg" %>
-          </div>
-          <div class = "chat-fukidashi">
-            <strong><%= message.message %></strong><br>
-          </div>
-        </div>
+        <tr>
+      <th>
+        <%= attachment_image_tag message.user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg" %>
+      </th>
+      <th>
+        <p><%= message.message %></p><br>
+      </th>
+        </tr>
       <% end %>
-    <% end %>
+      </tbody>
+      </table>
+    
   </div>
