@@ -12,7 +12,7 @@ class UsersController < ApplicationController
           if cu.room_id == u.room_id
             @isRoom = true
             @roomId = cu.room_id
-            binding.pry
+            # binding.pry
           end
         end
       end

@@ -7,7 +7,9 @@ class MessagesController < ApplicationController
       @message = Message.create(message_params)
       flash[:alert] = "メッセージ送信に失敗しました"
     end
-    redirect_to room_path(@message.room_id)
+    # redirect_to room_path(@message.room_id)
+    # binding.pry
+    render 'create'
   end
   
     def message_params
