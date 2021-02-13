@@ -15,11 +15,13 @@ Rails.application.routes.draw do
   # 新規登録、サインイン後のリダイレクト先を決めるタメのやつ
 
   root to: 'homes#top'
-  
+
   resources :books, only: [:index, :show, :edit, :create, :update, :destroy] do
     resource :favorites, only: [:create, :destroy]
     resources :book_comments, only: [:create, :destroy]
   end
+
+  
   resources :users, only: [:show, :index, :edit, :update] do
     resource :relationships, only: [:create, :destroy]
     get :follows, on: :member
@@ -29,5 +31,10 @@ Rails.application.routes.draw do
   
   resources :messages, only: [:create]
   resources :rooms, only: [:create, :show]
+  
+  namespace :admin do
+    resources :books, only: [:index, :show, :edit, :create, :update, :destroy]
+  end
+
 
 end
